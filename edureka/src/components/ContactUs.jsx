@@ -1,5 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 function ContactUs() {
+    // useEffect(()=>{
+    //     const Postadata=async ()=>
+    //     {
+    //         const response=await fetch("http://localhost:1110/contact",{
+    //             method:"POST",
+    //             headers:{
+    //                 "Content-Type":"application/json"
+    //             },
+    //             body:JSON.stringify({
+    //                 // title:Username,
+    //                 email:Useremail,
+    //                 Query:Query,
+    //             })
+    //         });
+    //         const data=await response.json();
+    //         console.log(data);
+           
+    //     }
+    //     Postadata()
+    // },[])
+    const [name,setName]=useState("");
+    const [email,setEmail]=useState("");
+    const [Query,setQuery]=useState("");
+    const details={name,email,Query};
+    // console.log(details)
+    const HandleData=(e)=>
+    {
+        e.preventDefault();
+        const Postadata=async ()=>
+        {  
+            try{
+            const response=await fetch("http://localhost:1110/contact",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(details)
+            });
+            // const data=await response.json();
+            // console.log(data);
+             // ✅ Clear input fields after successful submission
+             setName("");
+             setEmail("");
+             setQuery("");
+           
+        }
+        catch(error)
+        {
+            console.log("Error:",error);
+        }
+     
+        }
+        Postadata()
+    }
+
+ 
   return (
     <>
        <div className="container">
@@ -13,26 +69,26 @@ function ContactUs() {
                     </div>
             <div className="col-md-6">
             
-                 <form>
-                 <div class="form-group">
-                        <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter the Name"/>
+                 <form onSubmit={HandleData}>
+                 <div className="form-group">
+                        <label htmlFor="exampleInputName1">Name</label>
+                        <input type="text" className="form-control" id="exampleInputName1" name="name"     value={name|| ""} placeholder="Enter the Name"  onChange={(event)=>setName(event.target.value)}/>
                     </div>
                     <br/>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter the email"/>
+                    <div className="form-group">
+                        <label htmlFor="exampleInputEmail1">Email address</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" name="email"     value={email|| ""} aria-describedby="emailHelp" onChange={(event)=>setEmail(event.target.value)} placeholder="Enter the email"/>
 
                     </div>
                     <br/>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Query</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter your Query Here..."></textarea>
+                    <div className="form-group">
+                        <label htmlFor="exampleFormControlTextarea1">Query</label>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" name="Query" value={Query|| ""} rows="3" placeholder="Enter your Query Here..." onChange={(event)=>setQuery(event.target.value)}></textarea>
                     </div>
                     <br/>
                    
                    
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
           
         </div>

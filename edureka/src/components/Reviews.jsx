@@ -1,40 +1,41 @@
-import React from 'react'
-import img1  from './images/education (1).png';
+import React, { useEffect, useState } from 'react'
+
  function Reviews() {
+    const [data,setdata]=useState([])
+    useEffect(()=>{
+    const fetchData=async ()=>
+    {
+        try{
+            const fetchdata=await fetch('http://localhost:1110/review')
+            const Data=await fetchdata.json();
+            setdata(Data)
+        }
+        catch(error)
+        {
+            console.log(`Error:${error}`)
+        }
+    }
+    fetchData()
+    },[])
   return (
     <>
         <div className='review-container'>
-
-                <div className="card" style={{width: "auto"}}>
-                    <div className="card-body">
-                        <h5 className="card-title ">Card title</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                       
+            {
+                data.length>0?(data.map((item,index)=>
+                    <div className="card" style={{width: "auto"}} key={index}>
+                        <div className="card-body">
+                            <h5 className="card-title ">{ item.title}</h5>
+                            {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                            <p className="card-text">{item.description}</p>
+                        </div>
                     </div>
-                    </div>
-                    
-                <div className="card" style={{width: "auto"}}>
-                    <div className="card-body">
-                        <h5 className="card-title ">Card title</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                       
-                    </div>
-                    </div>
-                        
-                <div className="card" style={{width: "auto"}}>
-                    <div className="card-body">
-                        <h5 className="card-title ">Card title</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                       
-                    </div>
-                    </div>
-                    
-                </div>
-       
-        
+                
+                )):
+                (
+                    <p>No data available</p>
+                )
+            } 
+        </div>       
     </>
   )
 }

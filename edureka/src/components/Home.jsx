@@ -5,7 +5,6 @@ import LatestNews from './LatestNews'
 import NewTypeSlider from './NewTypeSlider'
 import LiveTv from './LiveTv'
 import Reviews from './Reviews'
-
  function Home() {
   return (
     <> 
@@ -17,10 +16,12 @@ import Reviews from './Reviews'
          {/* LiveTv Component */}
          <LiveTv/>
         {/* Latest NewsCard */}
-         <LatestNews/>
+            <LatestNews/>
          {/* reviews of website */}
          <Reviews/>
-    </>
+      </>
+    
+
   )
 }
 

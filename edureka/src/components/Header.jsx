@@ -7,16 +7,8 @@ import ContactUs from "./ContactUs";
 import Home from "./Home";
 import AboutUs from "./AboutUs";
 import Sports from "./Sports";
-
-
-// function Sports() {
-//   return <h2 className="text-center mt-4">Sports Updates</h2>;
-// }
-
-// function AboutUs() {
-//   return <h2 className="text-center mt-4">About Us</h2>;
-// }
-
+import News from "./NewsDetails";
+import logo from './images/news_247__1_-removebg-preview.png'
 function Header() {
   const [showToast, setShowToast] = useState(false);
 
@@ -26,18 +18,18 @@ function Header() {
   return (
     <Router>
       <div className="container justify-content-center align-items-center mt-4 sticky-top" style={{ width:"auto"}}>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-white w-100">
           <div className="container-fluid w-100">
-            <NavLink className="navbar-brand text-black title-bold" to="/">
+            <div className="navbar-brand text-black title-bold" to="">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg"
+                src={logo}
                 alt="Logo"
                 width="30"
                 height="24"
                 className="d-inline-block align-text-top"
               />
               Update 24/7
-            </NavLink>
+            </div>
             <button
               className="navbar-toggler bg-primary"
               type="button"
@@ -112,6 +104,7 @@ function Header() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/weather" element={<WeatherApi showToast={showToast} onClose={handleCloseToast} />} />
+          <Route path="/News/:id" element={<News />}/> {/* Add this to your Router in App.js */}
         </Routes>
       </div>
     </Router>

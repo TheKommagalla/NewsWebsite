@@ -23,7 +23,7 @@ const WeatherApi = ({ showToast, onClose }) => {
 
   const fetchWeather = async () => {
     try {
-      const response = await fetch(`http://localhost:1001/api/weather?city=${city}`);
+      const response = await fetch(`http://localhost:1110/weather/weather?city=${city}`);
       if (!response.ok) {
         throw new Error("City not found or API error");
       }
